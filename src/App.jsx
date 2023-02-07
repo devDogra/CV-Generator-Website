@@ -2,27 +2,34 @@ import React from "react"
 import "./App.css"
 
 const exp1 = {
+  id: "100",
   type: 'work',
   organisation: 'google',
   role: 'sde',
   startDate: '2019',
-  endDate: 'present'
+  endDate: 'present', 
+  description: "haha lying"
 }
 
 const exp2 = {
+  id: "200",
   type: 'work',
   organisation: 'twitter',
   role: 'hr',
   startDate: '2016',
-  endDate: '2018'
+  endDate: '2018',
+  description: "elon musk was me boss"
+
 }
 
 const exp3 = {
+  id: "300",
   type: 'study',
   organisation: 'DTU',
   role: 'computer engineering',
   startDate: '2011',
-  endDate: '2015'
+  endDate: '2015',
+  description: "worst time of me life, i fail;ed myself"
 }
 
 
@@ -35,32 +42,35 @@ export default class App extends React.Component{
       email: 'dedede',
       phone: '',
       
-      // experiences: [{
-      //   type: '',
-      //   organisation: '',
-      //   role: '',
-      //   startDate: '',
-      //   endDate: '',
-      // }],
       experiences: [
         exp1, exp2, exp3
       ]
-
- 
     }
     this.handleChange = this.handleChange.bind(this);    
   }
   // e is the event of the change, 
   // inputName is the 'name' attribute of the input
   // that changed
-  handleChange(e, inputName){
+  handleChange(e, inputName, experienceId){
     this.setState(state => {
       console.log(state);
-      const newState = {
-        [inputName]: e.target.value + "BOOGIE"
+      const newState = {};
+
+      if (experienceId){
+        
+        const exps = [...this.state.experiences];
+        const idx = exps.findIndex(exp => exp.id === experienceId);
+        exps[idx][e.target.name] = e.target.value;
+
+        newState.experiences =  exps;
+        return newState;
       }
-      console.log("STATE IS NOW");
-      console.log({...state, ...newState});
+      // console.log(state);
+
+      newState[inputName] =  e.target.value + "BOOGIE"
+     
+      // console.log("STATE IS NOW");
+      // console.log({...state, ...newState});
       return newState; 
     })
   }
@@ -85,7 +95,6 @@ class PersonalInfoInput extends React.Component{
     super(props);
   }
   render(){
-    console.log(this.props.fullname);
     return (
       <>
         <label  htmlFor="">
@@ -123,18 +132,27 @@ class PersonalInfoInput extends React.Component{
 
 class PeriodInput extends React.Component{
   render(){
+    const {startDate, endDate, expId, onChange} = this.props;
     return(
       <fieldset className="period-input">
       <legend>Period</legend>
       
       <label htmlFor="">
         Start date
-        <input type="text" />
+        <input 
+        name="startDate"
+        onChange={e => onChange(e, "startDate", expId)}
+        value={startDate}
+        type="text" />
       </label>
 
       <label htmlFor="">
         End date
-        <input type="text" />
+        <input 
+        name="endDate"
+        value={endDate}
+        onChange={e => onChange(e, "endDate", expId)}
+        type="text" />
       </label>
 
     </fieldset>
@@ -145,25 +163,42 @@ class PeriodInput extends React.Component{
 class ExperienceInfoInput extends React.Component{
 
  render(){
-  const study = (this.props.type === "study"); 
+   const {type, id, organisation, role, startDate, endDate, description, onChange} = this.props.value;
+   const study = (type === "study"); 
+   
   return(
     <div className="work-input">
       <label htmlFor="">
         {study ? "Institution" : "Company"}
-        <input type="text" />
+        <input 
+        name="organisation"
+        value={organisation}
+        type="text" 
+        onChange={e => this.props.onChange(e, "organisation", id)}/>
       </label>
 
       <label htmlFor="">
         {study ? "Degree" : "Role"}
-        <input type="text" />
+        <input type="text" 
+        value={role}
+        name="role"
+        onChange={(e) => this.props.onChange(e, "role", id)}/>
       </label>
 
-      <PeriodInput />
+      <PeriodInput 
+      onChange={this.props.onChange}
+      startDate={startDate}
+      endDate={endDate}
+      expId={id}/>
     
       {!study && (
         <label htmlFor="">
           Description
-          <input type="text" />
+          <input type="text" 
+          name="description"
+          value={description}
+          onChange={e => this.props.onChange(e, "description", id)}
+          />
         </label>
       )}
 
@@ -191,13 +226,27 @@ class ResumeForm extends React.Component{
 
         <h2>Work experience</h2>
         <div className="work-experience-form">
-          <ExperienceInfoInput/>    
+          <ExperienceInfoInput
+          idx={0}
+          onChange={this.props.onChange}
+          value={this.props.experiences[0]}
+          />    
+
+          <ExperienceInfoInput
+          idx={1}
+          onChange={this.props.onChange}
+          value={this.props.experiences[1]}
+          />    
           <button type="button">Add work input</button>
         </div>
 
         <h2>Education</h2>
         <div className="education-form">
-         <ExperienceInfoInput type="study" />
+         <ExperienceInfoInput 
+         idx={2}
+          onChange={this.props.onChange}
+         value={this.props.experiences[2]}
+         type="study" />
           <button type="button">Add education input</button>
         </div>
 
