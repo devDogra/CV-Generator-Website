@@ -8,43 +8,60 @@ import { nanoid } from "nanoid"
 const exp1 = {
   id: "100",
   type: 'work',
-  organisation: 'google',
-  role: 'sde',
+  organisation: 'Google',
+  role: 'Software Developer',
   startDate: '2019',
-  endDate: 'present', 
-  description: "haha lying"
+  endDate: 'Present', 
+  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, veniam laboriosam nobis magnam ad eveniet quidem dolorum corrupti sed molestias harum dolor tempora impedit pariatur aliquid asperiores qui quasi aliquam cupiditate doloremque quas rerum sint? Accusamus sint porro placeat nobis eaque eos quos iure minima maiores sunt! Eum, minima quam!"
 }
 
 const exp2 = {
   id: "200",
   type: 'work',
-  organisation: 'twitter',
-  role: 'hr',
-  startDate: '2016',
-  endDate: '2018',
-  description: "elon musk was me boss"
+  organisation: 'Twitter',
+  role: 'Software Developer Intern',
+  startDate: '2018',
+  endDate: '2019',
+  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, veniam laboriosam nobis magnam ad eveniet quidem dolorum corrupti sed molestias harum dolor tempora impedit pariatur aliquid asperiores qui qui"
 
 }
 
 const exp3 = {
   id: "300",
   type: 'study',
-  organisation: 'DTU',
-  role: 'computer engineering',
-  startDate: '2011',
-  endDate: '2015',
-  description: "1st sem COE 8th sem INS"
+  organisation: 'Delhi Technological University',
+  role: 'Computer Engineering',
+  startDate: '2015',
+  endDate: '2019',
+  description: "1st sem COEde 8th sem INS"
+}
+
+const exp4 = {
+  id: "900",
+  type: 'work',
+  organisation: 'Microsoft',
+  role: 'Software Developer Intern',
+  startDate: '2017',
+  endDate: '2018',
+  description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, veniam laboriosam nobis magnam ad eveniet quidem dolorum corrupti sed molestias harum dolor tempora impedit pariatur aliquid asperiores qui qui Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit, veniam laboriosam nobis magnam ad eveniet quidem dolorum corrupti"
 }
 
 const avmt1 = {
   id: "1000",
-  description: "Im blue dabade dee daba da"
+  description: "Achieved gold medal in QWERT Olympiad, YUIP (2018)"
 }
 const avmt2 = {
   id: "1032",
-  description: "Hello helo helo"
+  description: "Scored 99.8 in the National ABC Examination"
 }
-
+const avmt3 = {
+  id: "20000",
+  description: "Black belt in Brazillian Jiu Jutsu"
+}
+const avmt4 = {
+  id: "94",
+  description: "Rated 3000 on Codeforces"
+}
 
 
 
@@ -53,16 +70,16 @@ export default class App extends React.Component{
     super(props);
 
     this.state = {
-      fullname: 'ddedeede',
-      email: 'dedede',
-      phone: '',
+      fullname: 'First Middle Last',
+      email: 'myemailishere12@gmail.com',
+      phone: '98989898989',
       
       experiences: [
-        exp1, exp2, exp3
+        exp1, exp2, exp4, exp3
       ],
 
       achievments: [
-        avmt1, avmt2
+        avmt1, avmt2, avmt3, avmt4
       ]
     }
     this.handleChange = this.handleChange.bind(this);  
@@ -95,12 +112,9 @@ export default class App extends React.Component{
         newState.achievments = avmts;
         return newState; 
       } 
-      // console.log(state);
 
       newState[inputName] =  e.target.value;
      
-      // console.log("STATE IS NOW");
-      // console.log({...state, ...newState});
       return newState; 
     })
   }
@@ -393,11 +407,13 @@ class ExperienceInfoCard extends React.Component{
             <p className="location"></p>
           </div>
         </header>
-        <p className="description">
-          {
-            description
-          }
-        </p>
+        {type==="work" &&
+          <p className="description">
+            {
+              description
+            }
+          </p>
+        }
     </div>
     );
   }
@@ -473,7 +489,7 @@ class Resume extends React.Component{
                   key={avmt.id}
                   id={avmt.id}
                   >
-{`${idx+1}. ${avmt.description}`}
+                  {`${idx+1}. ${avmt.description}`}
                   </li>
                 );
               })
@@ -481,36 +497,13 @@ class Resume extends React.Component{
             </ul>
           </section>
 
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione quis at, dolorem minus in veniam exercitationem quas soluta error totam repellat nesciunt deleniti laborum animi obcaecati tempora voluptas! Labore ullam in, voluptatem dolor eum ipsam, est possimus deleniti eaque eos eligendi et ea, explicabo placeat. Vel nisi accusantium voluptatem soluta.
-
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro libero rerum fugit nesciunt explicabo, aut quisquam non ea corrupti quasi distinctio culpa fuga sunt sint assumenda eligendi aliquid voluptatum atque laborum quae officiis ad! Beatae at earum quam doloribus nihil quaerat voluptatem saepe iste autem. Eius animi dolore sit maiores.
-
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur a fugiat vero quos quaerat magni repellendus, iste voluptates. Sint corporis expedita modi! Repudiandae minima perferendis quibusdam cupiditate. Excepturi maxime deleniti laudantium repudiandae explicabo! Repellat non maxime necessitatibus, commodi nihil vel iusto voluptatibus alias tempore veritatis dolores placeat pariatur incidunt maiores facilis atque mollitia harum, consequatur autem officiis. Asperiores amet ullam odit obcaecati nihil laudantium fuga, iusto incidunt fugiat cumque officiis, quaerat voluptas ducimus. Atque, blanditiis tenetur. Aut vero tempore rerum nisi nobis maxime molestias exercitationem aperiam. Labore eum pariatur non ab voluptas, mollitia, sint, possimus nam modi voluptates consectetur neque.
-          </p>
+         
 
 
         </div>
 
       </div>
     );
-    
-        // return(
-    //   <>
-    //     <PersonalInfoBanner 
-    //     name="Dev Aryan Dogra" email="devdogra1@gmail.com" 
-    //     mobile={9811061693}
-    //     />
-
-    //     <Section 
-    //     title="Work experience"
-    //     startDate={new Date()}
-    //     />
-
-    //     <Section title="" />
-      
-    //   </>
-    // )
-
 
   }
 }
