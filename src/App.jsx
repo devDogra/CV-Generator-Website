@@ -33,8 +33,18 @@ const exp3 = {
   role: 'computer engineering',
   startDate: '2011',
   endDate: '2015',
-  description: "worst time of me life, i fail;ed myself"
+  description: "1st sem COE 8th sem INS"
 }
+
+const avmt1 = {
+  id: "1000",
+  description: "Im blue dabade dee daba da"
+}
+const avmt2 = {
+  id: "1032",
+  description: "Hello helo helo"
+}
+
 
 
 
@@ -49,15 +59,21 @@ export default class App extends React.Component{
       
       experiences: [
         exp1, exp2, exp3
+      ],
+
+      achievments: [
+        avmt1, avmt2
       ]
     }
     this.handleChange = this.handleChange.bind(this);  
     this.addExperienceInfo = this.addExperienceInfo.bind(this);  
+    this.addAchievmentInfo = this.addAchievmentInfo.bind(this);
   }
   // e is the event of the change, 
   // inputName is the 'name' attribute of the input
   // that changed
-  handleChange(e, inputName, experienceId){
+
+  handleChange(e, inputName, experienceId, achievmentId){
     this.setState(state => {
       console.log(state);
       const newState = {};
@@ -71,6 +87,14 @@ export default class App extends React.Component{
         newState.experiences =  exps;
         return newState;
       }
+      else if (achievmentId){
+        const avmts = [...state.achievments];
+        const idx = avmts.findIndex(avmt => avmt.id === achievmentId)
+        avmts[idx]["description"] = e.target.value;
+
+        newState.achievments = avmts;
+        return newState; 
+      } 
       // console.log(state);
 
       newState[inputName] =  e.target.value + "BOOGIE"
@@ -80,8 +104,16 @@ export default class App extends React.Component{
       return newState; 
     })
   }
-
-  addExperienceInfo(type, e){
+  addAchievmentInfo(){
+    const emptyAchievment = {
+      id: nanoid(),
+      description: '',
+    }
+    this.setState({
+      achievments: [...this.state.achievments, emptyAchievment]
+    })
+  }
+  addExperienceInfo(type){
     const emptyExperience = {
       id: nanoid(),
       type: type,
@@ -109,8 +141,10 @@ export default class App extends React.Component{
         email={this.state.email}
         phone={this.state.phone}
         experiences={this.state.experiences}
+        achievments={this.state.achievments}
         onChange={this.handleChange}
         onAddExperience={this.addExperienceInfo}
+        onAddAchievment={this.addAchievmentInfo}
         />
         <Resume />
       </>
@@ -302,6 +336,29 @@ class ResumeForm extends React.Component{
             })
           }
 
+        </div>
+
+
+        <div className="form-heading">
+          <h2>Achievments</h2>
+          <button 
+          onClick={this.props.onAddAchievment.bind(this)}
+          type="button">Add achievment input</button>
+        </div>
+        <div className="achievments-form">
+          {
+            this.props.achievments.map(avmt => {
+              return (
+                <input 
+                name="achievment"
+                key={avmt.id}
+                id={avmt.id}
+                value={avmt.description}
+                onChange={e => this.props.onChange(e, "achievment", null, avmt.id)}
+                />
+              );
+            })
+          }
         </div>
 
       </form>
