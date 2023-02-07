@@ -97,7 +97,7 @@ export default class App extends React.Component{
       } 
       // console.log(state);
 
-      newState[inputName] =  e.target.value + "BOOGIE"
+      newState[inputName] =  e.target.value;
      
       // console.log("STATE IS NOW");
       // console.log({...state, ...newState});
@@ -146,7 +146,13 @@ export default class App extends React.Component{
         onAddExperience={this.addExperienceInfo}
         onAddAchievment={this.addAchievmentInfo}
         />
-        <Resume />
+        <Resume 
+        fullname={this.state.fullname}
+        email={this.state.email}
+        phone={this.state.phone}
+        experiences={this.state.experiences}
+        achievments={this.state.achievments}
+        />
       </>
     );
   }
@@ -370,20 +376,27 @@ class ResumeForm extends React.Component{
 /* -------------------------------------------------------------------------- */
 class ExperienceInfoCard extends React.Component{
   render(){
+    const {id, type, organisation, role, startDate, endDate, description} = this.props;
+    console.log("PROPS => ");
+    console.log(this.props.experienceInfo);
+
+
     return(
       <div className="experience-info-card">
         <header>
           <div className="company-info">
-            <p className="company-name">Google</p>
-            <p className="company-role">SDE</p>
+            <p className="company-name">{organisation}</p>
+            <p className="company-role">{role}</p>
           </div>
           <div className="period-info">
-            <p className="period">2019-Present</p>
-            <p className="location">Delhi</p>
+            <p className="period">{ `${startDate} - ${endDate}`}</p>
+            <p className="location"></p>
           </div>
         </header>
         <p className="description">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae incidunt fugit ullam repellat dolorum ducimus cum vitae deleniti beatae atque, quas commodi accusantium quos placeat assumenda perspiciatis. Illum, quod! Esse labore dolorem necessitatibus nam deleniti corrupti placeat dolores similique accusamus tempora, quidem assumenda reiciendis voluptatem velit odit, perferendis, porro facere?
+          {
+            description
+          }
         </p>
     </div>
     );
@@ -393,37 +406,78 @@ class ExperienceInfoCard extends React.Component{
 class Resume extends React.Component{
 
   render(){
+    const {experiences, fullname, email, phone, achievments} = this.props; 
+    // console.log("PROPS+")
+    console.log(this.props);
     return (
       <div className="resume-container">
         <div className="resume">
 
           <section className="personal-info-banner">
-            <h1>Dev Aryan Dogra</h1>
+            <h1>{fullname}</h1>
             <div className="contact-info">
-              <p>devdogra1@gmail.com</p>
-              <p>9811061693</p>
-              <p>Delhi-110034</p>
+              <p>{email}</p>
+              <p>{phone}</p>
+              {/* <p>Delhi-110034</p> */}
             </div>
           </section>
 
           <h2>Work experience</h2>
           <section className="work-experiences">
-            <ExperienceInfoCard />
-            <ExperienceInfoCard />
+            {
+              experiences.filter(exp => exp.type === "work").map(exp => {
+                return (
+                  <ExperienceInfoCard
+                  key={exp.id}
+                  id={exp.id}
+                  type={exp.type}
+                  organisation={exp.organisation}
+                  role={exp.role}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  description={exp.description}
+                  />
+                );
+              })
+            }
           </section>
 
           <h2>Education</h2>
           <section className="education">
-            <ExperienceInfoCard />
+            {
+              experiences.filter(exp => exp.type === "study").map(exp => {
+                return (
+                  <ExperienceInfoCard
+                  key={exp.id}
+                  id={exp.id}
+                  type={exp.type}
+                  organisation={exp.organisation}
+                  role={exp.role}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  description={exp.description}
+                  />
+                );
+              })
+            }
           </section>
 
           <h2>Achievments</h2>
           <section className="achievments">
             <ul>
-              <li>Scored 99 in XYZ</li>
-              <li>ABCD finalist</li>
-              <li>Recipient of BLAH</li>
-              <li>Recipient of BLAH</li>
+            {
+              achievments.map((avmt, idx) => {
+                return (
+                  <li
+                  className=""
+                  key={avmt.id}
+                  id={avmt.id}
+                  >
+{`${idx+1}. ${avmt.description}`}
+                  </li>
+                );
+              })
+            }
             </ul>
           </section>
 
