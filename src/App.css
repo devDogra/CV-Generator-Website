@@ -9,20 +9,39 @@
 #root > * {
   outline: 2px solid black;
   border: 2px solid black;
+  flex: 1;
 }
-
+.resume-container {
+}
+.resume-form {
+  padding: 1rem;
+  background-color: rgba(224, 255, 255, 0.503);
+}
+.resume {
+  position: sticky;
+  top: 0px;
+}
 .form-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.form-heading > h2 {
+  margin: 0;
+}
 .form-heading > button {
   width: 25%;
+  margin: 0;
 }
+
 .experience-info-input,
 .personal-info-input {
-  margin: 2rem 1rem;
-  box-shadow: 1px 5px 10px 2px;
+  margin: 2rem 0 3rem 0;
+  box-shadow: 1px 1px 10px 1px var(--primary-hover);
   padding: 1rem;
-  border: 3px solid black;
+  background-color: white;
+
+  border: 2px solid var(--primary);
+}
+input {
 }

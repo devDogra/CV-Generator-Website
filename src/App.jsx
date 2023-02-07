@@ -239,7 +239,7 @@ class ResumeForm extends React.Component{
   render(){
     console.log(this.props);
     return (
-      <form action="">
+      <form className="resume-form" action="">
 
         <h2>Personal Info</h2>
         <div className="personal-info-form">
@@ -311,8 +311,17 @@ class ResumeForm extends React.Component{
 class Resume extends React.Component{
 
   render(){
-    return <h1>Hello</h1>
-    // return(
+    return (
+      <div className="resume-container">
+        <div className="resume">
+          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea aut recusandae facilis dicta repellat quis optio! Harum blanditiis vero, dolor nam doloribus laboriosam modi molestiae voluptate qui molestias. Perspiciatis sint ipsa aliquid, expedita non quaerat tenetur obcaecati rerum eaque asperiores omnis magnam fugit impedit dolorum neque. Voluptatem sequi mollitia sit!
+          </h1>
+        </div>
+
+      </div>
+    );
+    
+        // return(
     //   <>
     //     <PersonalInfoBanner 
     //     name="Dev Aryan Dogra" email="devdogra1@gmail.com" 
