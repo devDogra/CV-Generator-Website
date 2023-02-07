@@ -1,6 +1,6 @@
 import React from "react"
 import "./App.css"
-
+import { nanoid } from "nanoid"
 // todo:
 // make the add more exp and education btns work
 
@@ -35,15 +35,6 @@ const exp3 = {
   description: "worst time of me life, i fail;ed myself"
 }
 
-const emptyExperience = {
-  id: '',
-  type: '',
-  organisation: '',
-  role: '',
-  startDate: '',
-  endDate: '',
-  description: ''
-}
 
 
 export default class App extends React.Component{
@@ -59,7 +50,8 @@ export default class App extends React.Component{
         exp1, exp2, exp3
       ]
     }
-    this.handleChange = this.handleChange.bind(this);    
+    this.handleChange = this.handleChange.bind(this);  
+    this.addExperienceInfo = this.addExperienceInfo.bind(this);  
   }
   // e is the event of the change, 
   // inputName is the 'name' attribute of the input
@@ -87,6 +79,27 @@ export default class App extends React.Component{
       return newState; 
     })
   }
+
+  addExperienceInfo(type, e){
+    const emptyExperience = {
+      id: nanoid(),
+      type: type,
+      organisation: '',
+      role: '',
+      startDate: '',
+      endDate: '',
+      description: ''
+    }
+
+    console.log(emptyExperience);
+
+    this.setState({
+      experiences: this.state.experiences.concat(emptyExperience)
+    })
+
+
+
+  }
   render(){
     return (
       <>
@@ -96,6 +109,7 @@ export default class App extends React.Component{
         phone={this.state.phone}
         experiences={this.state.experiences}
         onChange={this.handleChange}
+        onAddExperience={this.addExperienceInfo}
         />
         <Resume />
       </>
@@ -239,7 +253,10 @@ class ResumeForm extends React.Component{
         
         <div className="form-heading">
           <h2>Work experience</h2>
-          <button type="button">Add work input</button>
+          <button 
+          // Eq to: e => onAddExp("work", e)
+          onClick={this.props.onAddExperience.bind(this, "work")}
+          type="button">Add work input</button>
         </div>
         <div className="work-experience-form">
 
@@ -247,6 +264,7 @@ class ResumeForm extends React.Component{
             this.props.experiences.filter(exp => exp.type === "work").map((exp, idx) => {
               return (
                 <ExperienceInfoInput
+                key={exp.id}
                 idx={idx}
                 onChange={this.props.onChange}
                 value={exp}
@@ -260,7 +278,9 @@ class ResumeForm extends React.Component{
 
         <div className="form-heading">
           <h2>Education</h2>
-          <button type="button">Add education input</button>
+          <button 
+          onClick={this.props.onAddExperience.bind(this, "study")}
+          type="button">Add education input</button>
         </div>
         
         <div className="education-form">
@@ -269,6 +289,8 @@ class ResumeForm extends React.Component{
             this.props.experiences.filter(exp => exp.type === "study").map((exp, idx) => {
               return (
                 <ExperienceInfoInput
+                key={exp.id}
+
                 idx={idx}
                 onChange={this.props.onChange}
                 value={exp}
