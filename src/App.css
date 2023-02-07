@@ -1,0 +1,16 @@
+.work-period-input {
+  display: flex;
+}
+* {
+  /* padding: 3px; */
+  /* margin: 3px; */
+}
+
+#root {
+  display: flex;
+  outline: 3px solid red;
+}
+#root > * {
+  outline: 2px solid black;
+  border: 2px solid black;
+}
