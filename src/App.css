@@ -1,21 +1,26 @@
+html {
+  background-color: aliceblue;
+  background-color: var(--main-bgc);
+}
+
+:root {
+  --main-bgc: rgba(224, 255, 255, 0.503);
+}
 .period-input {
   display: flex;
 }
 
 #root {
   display: flex;
-  outline: 3px solid red;
 }
 #root > * {
-  outline: 2px solid black;
-  border: 2px solid black;
   flex: 1;
 }
 .resume-container {
 }
 .resume-form {
   padding: 1rem;
-  background-color: rgba(224, 255, 255, 0.503);
+  background-color: var(--main-bgc);
 }
 .resume {
   position: sticky;

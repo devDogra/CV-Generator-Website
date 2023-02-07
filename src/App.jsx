@@ -1,5 +1,6 @@
 import React from "react"
 import "./App.css"
+import "./Resume.css"
 import { nanoid } from "nanoid"
 // todo:
 // make the add more exp and education btns work
@@ -308,14 +309,75 @@ class ResumeForm extends React.Component{
   }
 }
 
+
+/* -------------------------------------------------------------------------- */
+class ExperienceInfoCard extends React.Component{
+  render(){
+    return(
+      <div className="experience-info-card">
+        <header>
+          <div className="company-info">
+            <p className="company-name">Google</p>
+            <p className="company-role">SDE</p>
+          </div>
+          <div className="period-info">
+            <p className="period">2019-Present</p>
+            <p className="location">Delhi</p>
+          </div>
+        </header>
+        <p className="description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae incidunt fugit ullam repellat dolorum ducimus cum vitae deleniti beatae atque, quas commodi accusantium quos placeat assumenda perspiciatis. Illum, quod! Esse labore dolorem necessitatibus nam deleniti corrupti placeat dolores similique accusamus tempora, quidem assumenda reiciendis voluptatem velit odit, perferendis, porro facere?
+        </p>
+    </div>
+    );
+  }
+}
+
 class Resume extends React.Component{
 
   render(){
     return (
       <div className="resume-container">
         <div className="resume">
-          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea aut recusandae facilis dicta repellat quis optio! Harum blanditiis vero, dolor nam doloribus laboriosam modi molestiae voluptate qui molestias. Perspiciatis sint ipsa aliquid, expedita non quaerat tenetur obcaecati rerum eaque asperiores omnis magnam fugit impedit dolorum neque. Voluptatem sequi mollitia sit!
-          </h1>
+
+          <section className="personal-info-banner">
+            <h1>Dev Aryan Dogra</h1>
+            <div className="contact-info">
+              <p>devdogra1@gmail.com</p>
+              <p>9811061693</p>
+              <p>Delhi-110034</p>
+            </div>
+          </section>
+
+          <h2>Work experience</h2>
+          <section className="work-experiences">
+            <ExperienceInfoCard />
+            <ExperienceInfoCard />
+          </section>
+
+          <h2>Education</h2>
+          <section className="education">
+            <ExperienceInfoCard />
+          </section>
+
+          <h2>Achievments</h2>
+          <section className="achievments">
+            <ul>
+              <li>Scored 99 in XYZ</li>
+              <li>ABCD finalist</li>
+              <li>Recipient of BLAH</li>
+              <li>Recipient of BLAH</li>
+            </ul>
+          </section>
+
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione quis at, dolorem minus in veniam exercitationem quas soluta error totam repellat nesciunt deleniti laborum animi obcaecati tempora voluptas! Labore ullam in, voluptatem dolor eum ipsam, est possimus deleniti eaque eos eligendi et ea, explicabo placeat. Vel nisi accusantium voluptatem soluta.
+
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro libero rerum fugit nesciunt explicabo, aut quisquam non ea corrupti quasi distinctio culpa fuga sunt sint assumenda eligendi aliquid voluptatum atque laborum quae officiis ad! Beatae at earum quam doloribus nihil quaerat voluptatem saepe iste autem. Eius animi dolore sit maiores.
+
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur a fugiat vero quos quaerat magni repellendus, iste voluptates. Sint corporis expedita modi! Repudiandae minima perferendis quibusdam cupiditate. Excepturi maxime deleniti laudantium repudiandae explicabo! Repellat non maxime necessitatibus, commodi nihil vel iusto voluptatibus alias tempore veritatis dolores placeat pariatur incidunt maiores facilis atque mollitia harum, consequatur autem officiis. Asperiores amet ullam odit obcaecati nihil laudantium fuga, iusto incidunt fugiat cumque officiis, quaerat voluptas ducimus. Atque, blanditiis tenetur. Aut vero tempore rerum nisi nobis maxime molestias exercitationem aperiam. Labore eum pariatur non ab voluptas, mollitia, sint, possimus nam modi voluptates consectetur neque.
+          </p>
+
+
         </div>
 
       </div>

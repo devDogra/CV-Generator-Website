@@ -1,0 +1,51 @@
+:root {
+  font-size: 16px;
+}
+.contact-info {
+  display: flex;
+}
+.resume {
+  padding: 2rem;
+  overflow: hidden;
+  height: 297mm;
+  width: 210mm;
+  margin: 0 auto;
+  background-color: white;
+}
+.resume * {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  /* outline: 1px solid black; */
+}
+.contact-info > * {
+  margin-right: 1.25rem;
+  padding: 0.5rem 0rem;
+}
+.experience-info-card > header {
+  display: flex;
+  justify-content: space-between;
+}
+.experience-info-card > header p {
+  font-weight: bold;
+}
+.experience-info-card .description {
+  padding: 0.5rem 0 1.5rem 1rem;
+}
+
+.achievments > ul > li {
+  list-style-type: none;
+}
+.achievments > ul {
+  padding: 0 0 0 1rem;
+}
+
+.resume h1 {
+  font-size: 1.75rem;
+}
+.resume h2 {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  color: royalblue;
+}
