@@ -1,6 +1,9 @@
 import React from "react"
 import "./App.css"
 
+// todo:
+// make the add more exp and education btns work
+
 const exp1 = {
   id: "100",
   type: 'work',
@@ -30,6 +33,16 @@ const exp3 = {
   startDate: '2011',
   endDate: '2015',
   description: "worst time of me life, i fail;ed myself"
+}
+
+const emptyExperience = {
+  id: '',
+  type: '',
+  organisation: '',
+  role: '',
+  startDate: '',
+  endDate: '',
+  description: ''
 }
 
 
@@ -96,7 +109,7 @@ class PersonalInfoInput extends React.Component{
   }
   render(){
     return (
-      <>
+      <div className="personal-info-input">
         <label  htmlFor="">
           Name
           <input 
@@ -124,7 +137,7 @@ class PersonalInfoInput extends React.Component{
           name="phone"
           type="text" />
         </label>
-      </>
+      </div>
 
     );
   }
@@ -167,7 +180,7 @@ class ExperienceInfoInput extends React.Component{
    const study = (type === "study"); 
    
   return(
-    <div className="work-input">
+    <div className="experience-info-input">
       <label htmlFor="">
         {study ? "Institution" : "Company"}
         <input 
@@ -223,31 +236,49 @@ class ResumeForm extends React.Component{
           onChange={this.props.onChange}
           />
         </div>
-
-        <h2>Work experience</h2>
-        <div className="work-experience-form">
-          <ExperienceInfoInput
-          idx={0}
-          onChange={this.props.onChange}
-          value={this.props.experiences[0]}
-          />    
-
-          <ExperienceInfoInput
-          idx={1}
-          onChange={this.props.onChange}
-          value={this.props.experiences[1]}
-          />    
+        
+        <div className="form-heading">
+          <h2>Work experience</h2>
           <button type="button">Add work input</button>
         </div>
+        <div className="work-experience-form">
 
-        <h2>Education</h2>
-        <div className="education-form">
-         <ExperienceInfoInput 
-         idx={2}
-          onChange={this.props.onChange}
-         value={this.props.experiences[2]}
-         type="study" />
+          {
+            this.props.experiences.filter(exp => exp.type === "work").map((exp, idx) => {
+              return (
+                <ExperienceInfoInput
+                idx={idx}
+                onChange={this.props.onChange}
+                value={exp}
+                type="work"
+                />
+
+              );
+            })
+          }
+        </div>
+
+        <div className="form-heading">
+          <h2>Education</h2>
           <button type="button">Add education input</button>
+        </div>
+        
+        <div className="education-form">
+
+          {
+            this.props.experiences.filter(exp => exp.type === "study").map((exp, idx) => {
+              return (
+                <ExperienceInfoInput
+                idx={idx}
+                onChange={this.props.onChange}
+                value={exp}
+                type="study"
+                />
+
+              );
+            })
+          }
+
         </div>
 
       </form>
